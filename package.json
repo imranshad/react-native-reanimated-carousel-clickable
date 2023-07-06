@@ -38,7 +38,10 @@
         "ios",
         "android"
     ],
-    "repository": "git+https://github.com/imranshad/react-native-reanimated-carousel-clickable.git",
+    "repository": {
+        type:"git",
+        url:"git+https://github.com/imranshad/react-native-reanimated-carousel-clickable.git"
+    },
     "author": "Doho <zhaodonghao586@outlook.com> (https://github.com/dohooo)",
     "license": "MIT",
     "bugs": {
