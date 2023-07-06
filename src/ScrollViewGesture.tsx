@@ -1,8 +1,8 @@
 import React from "react";
 import type { StyleProp, ViewStyle } from "react-native";
-import type { PanGestureHandlerGestureEvent } from "react-native-gesture-handler";
+import type { HandlerStateChangeEvent, PanGestureHandlerGestureEvent, TapGestureHandlerEventPayload } from "react-native-gesture-handler";
 import {
-  PanGestureHandler,
+  PanGestureHandler, TapGestureHandler,
 } from "react-native-gesture-handler";
 import Animated, {
   cancelAnimation,
@@ -20,6 +20,7 @@ import { Easing } from "./constants";
 import { CTX } from "./store";
 import type { WithTimingAnimation } from "./types";
 import { dealWithAnimation } from "./utils/dealWithAnimation";
+import { View } from "react-native-interactable";
 
 interface GestureContext extends Record<string, unknown> {
   validStart: boolean
@@ -37,6 +38,7 @@ interface Props {
   onTouchBegin?: () => void
   onTouchEnd?: () => void
   translation: Animated.SharedValue<number>
+  onPress: (absoluteX:number) => void
 }
 
 const IScrollViewGesture: React.FC<Props> = (props) => {
@@ -345,6 +347,9 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
   );
 
   return (
+    <TapGestureHandler
+      onHandlerStateChange={(e)=>props.onPress(e.nativeEvent.absoluteX)}>
+      <View>
     <PanGestureHandler
       {...panGestureHandlerProps}
       enabled={enabled}
@@ -360,6 +365,8 @@ const IScrollViewGesture: React.FC<Props> = (props) => {
         {props.children}
       </Animated.View>
     </PanGestureHandler>
+    </View>
+    </TapGestureHandler>
   );
 };
 
