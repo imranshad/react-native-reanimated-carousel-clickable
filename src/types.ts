@@ -1,5 +1,5 @@
 import type { StyleProp, ViewStyle } from "react-native";
-import type { PanGestureHandlerProps } from "react-native-gesture-handler";
+import type { HandlerStateChangeEvent, PanGestureHandlerProps, TapGestureHandlerEventPayload } from "react-native-gesture-handler";
 import type {
   AnimatedStyleProp,
   SharedValue,
@@ -201,6 +201,8 @@ export type TCarouselProps<T = any> = {
      * @deprecated please use snapEnabled instead
      */
   enableSnap?: boolean
+
+  onPress: (event: HandlerStateChangeEvent<TapGestureHandlerEventPayload>) => void
 } & (TParallaxModeProps | TStackModeProps);
 
 export interface ICarouselInstance {
@@ -223,6 +225,8 @@ export interface ICarouselInstance {
      * scrollTo(-2) is equivalent to prev(2), scrollTo(2) is equivalent to next(2)
      */
   scrollTo: (opts?: TCarouselActionOptions) => void
+
+  onPress: (absoluteX:number) => void
 }
 
 export interface CarouselRenderItemInfo<ItemT> {
