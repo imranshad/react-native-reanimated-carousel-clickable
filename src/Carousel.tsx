@@ -203,6 +203,7 @@ const Carousel = React.forwardRef<ICarouselInstance, TCarouselProps<any>>(
     return (
       <CTX.Provider value={{ props, common: commonVariables }}>
         <ScrollViewGesture
+          onPress={props.onPress}
           key={mode}
           size={size}
           translation={handlerOffset}
